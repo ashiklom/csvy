@@ -48,31 +48,22 @@ function(
         
         # add 'name' field
         fields[[i]][["name"]] <- names(x)[i]
-        # add 'title' field
-        if ("label" %in% names(fields_this_col)) {
-            fields[[i]][["title"]] <- fields_this_col[["label"]]
-        }
-        # R has no canonical analogue to 'description' field, but if it's there add it
-        if ("description" %in% names(fields_this_col)) {
-            fields[[i]][["description"]] <- fields_this_col[["description"]]
-        }
+
         # add 'type' field
         ## default is 'string' unless specified otherwise
         fields[[i]][["type"]] <- switch(class(x[[i]])[1L],
-                                        character = "string",
-                                        Date = "date",
-                                        integer = "integer",
-                                        logical = "boolean",
-                                        numeric = "number",
-                                        POSIXct = "datetime",
+                                        "character" = "string",
+                                        "Date" = "date",
+                                        "integer" = "integer",
+                                        "logical" = "boolean",
+                                        "numeric" = "number",
+                                        "POSIXct" = "datetime",
                                         "string")
-        if ("labels" %in% names(fields_this_col)) {
-            fields[[i]][["labels"]] <- 
-              setNames(as.list(unname(fields_this_col$labels)), names(fields_this_col$labels))
-        }
-        if ("levels" %in% names(fields_this_col)) {
-            fields[[i]][["levels"]] <- 
-              setNames(as.list(unname(fields_this_col$levels)), names(fields_this_col$levels))
+
+        # add remaining attributes
+        drop_attr <- c("names", "class")
+        for (attribute in setdiff(names(fields_this_col), drop_attr)) {
+            fields[[i]] <- field_from_attr(fields[[i]], attribute, fields_this_col)
         }
         rm(fields_this_col)
     }
@@ -125,4 +116,19 @@ function(
         }
     }
     invisible(x)
+}
+
+#' Set field from attributes list
+#'
+#' @param field List to which to add attributes
+#' @param attribute Character name of attribute to add
+#' @param values List of attributes, returned by \code{attributes(x)}
+#' @return Modified field list with given attribute set to given value
+field_from_attr <- function(field, attribute, values) {
+    if (length(data) > 1) {
+        field[[attribute]] <- setNames(as.list(unname(data)), names(data))
+    } else {
+        field[[attribute]] <- values[[attribute]]
+    }
+    field
 }
