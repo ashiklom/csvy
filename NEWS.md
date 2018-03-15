@@ -1,3 +1,8 @@
+# CHANGES TO v0.2.2
+
+ * Refactored `read_csvy` and `write_csvy` functions
+ * Added support for arbitrary attribute-tag translations. Any attributes not treated specially (`names`, `class`) can be read or written.
+
 # CHANGES TO v0.2.1
 
  * Expanded test suite and fixed some small bugs in the process.
