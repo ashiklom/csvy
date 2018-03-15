@@ -19,7 +19,8 @@ Imports:
     tools,
     data.table,
     jsonlite,
-    yaml
+    yaml,
+    methods
 Suggests:
     testthat,
     datasets

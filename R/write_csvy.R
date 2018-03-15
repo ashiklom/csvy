@@ -125,8 +125,8 @@ function(
 #' @param values List of attributes, returned by \code{attributes(x)}
 #' @return Modified field list with given attribute set to given value
 field_from_attr <- function(field, attribute, values) {
-    if (length(data) > 1) {
-        field[[attribute]] <- setNames(as.list(unname(data)), names(data))
+    if (length(values[[attribute]]) > 1) {
+        field[[attribute]] <- setNames(as.list(unname(values[[attribute]])), names(values[[attribute]]))
     } else {
         field[[attribute]] <- values[[attribute]]
     }

@@ -7,7 +7,9 @@
 type_from_field(variable, fields, try_to_factorize)
 }
 \arguments{
-\item{fields}{Named list of metadata fields to add to data}
+\item{variable}{Object to be modified}
+
+\item{fields}{Named list of fields from which to get attribute}
 
 \item{try_to_factorize}{Whether or not to coerce to factor}
 }

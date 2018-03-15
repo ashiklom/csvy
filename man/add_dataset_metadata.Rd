@@ -7,7 +7,12 @@
 add_dataset_metadata(data, metadata_list)
 }
 \arguments{
-\item{data}{Data frame}
+\item{data}{Data frame whose columns should be modified}
+
+\item{metadata_list}{List of metadata fields to add to data}
+}
+\value{
+data Modified data object with attributes added to columns
 }
 \description{
 Add metadata to a dataset as a whole

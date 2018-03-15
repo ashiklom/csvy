@@ -7,14 +7,14 @@
 add_variable_metadata(data, fields, try_to_factorize = "never")
 }
 \arguments{
-\item{data}{Data frame}
+\item{data}{Data frame whose columns should be modified}
 
 \item{fields}{Named list of metadata fields to add to data}
 
 \item{try_to_factorize}{Whether or not to coerce to factor}
 }
 \value{
-variable
+Modified data object with attributes added to columns
 }
 \description{
 Add metadata to columns in a data frame

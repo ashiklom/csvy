@@ -1,9 +1,9 @@
 #' Add metadata to columns in a data frame
 #'
-#' @param data Data frame 
+#' @param data Data frame whose columns should be modified
 #' @param fields Named list of metadata fields to add to data
 #' @param try_to_factorize Whether or not to coerce to factor
-#' @return variable
+#' @return Modified data object with attributes added to columns 
 add_variable_metadata <- function(data, fields, try_to_factorize = "never") {
 
     # check metadata against header row
@@ -27,6 +27,8 @@ add_variable_metadata <- function(data, fields, try_to_factorize = "never") {
 #' Add metadata to a dataset as a whole
 #'
 #' @inheritParams add_variable_metadata
+#' @param metadata_list List of metadata fields to add to data
+#' @return data Modified data object with attributes added to columns
 add_dataset_metadata <- function(data, metadata_list) {
     # Remove metadata objects already used.
     metadata_list[c("fields", "resources")] <- NULL
@@ -95,7 +97,7 @@ attr_from_field <- function(variable, attribute, fields, try_to_factorize = NULL
 
 #' Set an object's type based on a list of fields
 #'
-#' @inheritParams add_variable_metadata
+#' @inheritParams attr_from_field
 type_from_field <- function(variable, fields, try_to_factorize) {
     type <- fields[["type"]]
     if (type == "string") {
